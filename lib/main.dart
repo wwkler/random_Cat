@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:random_cat_practice/home_screen.dart';
+import 'package:random_cat_practice/sspplash.dart';
 import 'package:random_cat_practice/stroage/stroage.dart';
 
 void main() {
@@ -12,7 +13,8 @@ void main() {
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: HomeScreen(),
+          // Splash 화면을 보여주기 위해....
+          home: Ssplash(), 
         )),
   );
 }
