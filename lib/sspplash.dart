@@ -31,6 +31,8 @@ class _SsplashState extends State<Ssplash> {
     return Scaffold(
       backgroundColor: Color(0xFFed9e61),
       body: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
         child: Center(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,

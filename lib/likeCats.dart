@@ -40,7 +40,7 @@ class _LikeCatsState extends State<LikeCats> {
             title: Text(
               'Favorite Cats',
               style: GoogleFonts.bahiana(
-                fontSize: 40.0,
+                fontSize: 35.0,
                 fontWeight: FontWeight.w400,
               ),
             ),
@@ -56,61 +56,63 @@ class _LikeCatsState extends State<LikeCats> {
               )
             ],
           ),
-          body: Column(children: [
-            SizedBox(
-              height: 20,
-              child: IconButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  icon: Icon(Icons.arrow_back)),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 15),
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.8,
-              child: GridView.count(
-                crossAxisCount: 2,
-                childAspectRatio: 3 / 3,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
-                children: List.generate(favoriteCats.length, (index) {
-                  CatModel cat = favoriteCats[index];
-                  String catUrl = cat.url;
-
-                  return GestureDetector(
-                      onTap: () {
-                         // PhtoView를 보여주기 위한 화면 전환 
-                      Navigator.of(context).push(
-                          MaterialPageRoute(builder: (BuildContext context) {
-                        return ViewPhoto(catUrl: catUrl);
-                      }));
-                      },
-                      
-                      onDoubleTap: () {
-                        // 선택한 고양이 이미지 파일을 SharedPreferences 에서 삭제한다.
-                        provider.deleteFavoriteCat(cat);
-
-                        setState(() {
-                          provider
-                              .getFavoriteCats(); // 최신 상태의 SharedPreferences 파일을 가져온다.
-                        });
-                      },
-                      child: Stack(
-                        children: [
-                          // Image
-                          Positioned.fill(
-                            child: Image.network(
-                              catUrl,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ],
-                      ));
-                }),
+          body: SingleChildScrollView(
+            child: Column(children: [
+              SizedBox(
+                height: 20,
+                child: IconButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    icon: Icon(Icons.arrow_back)),
               ),
-            ),
-          ]),
+              Container(
+                margin: EdgeInsets.only(top: 15),
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height * 0.8,
+                child: GridView.count(
+                  crossAxisCount: 2,
+                  childAspectRatio: 3 / 3,
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10,
+                  children: List.generate(favoriteCats.length, (index) {
+                    CatModel cat = favoriteCats[index];
+                    String catUrl = cat.url;
+          
+                    return GestureDetector(
+                        onTap: () {
+                           // PhtoView를 보여주기 위한 화면 전환 
+                        Navigator.of(context).push(
+                            MaterialPageRoute(builder: (BuildContext context) {
+                          return ViewPhoto(catUrl: catUrl);
+                        }));
+                        },
+                        
+                        onDoubleTap: () {
+                          // 선택한 고양이 이미지 파일을 SharedPreferences 에서 삭제한다.
+                          provider.deleteFavoriteCat(cat);
+          
+                          setState(() {
+                            provider
+                                .getFavoriteCats(); // 최신 상태의 SharedPreferences 파일을 가져온다.
+                          });
+                        },
+                        child: Stack(
+                          children: [
+                            // Image
+                            Positioned.fill(
+                              child: Image.network(
+                                catUrl,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ],
+                        ));
+                  }),
+                ),
+              ),
+            ]),
+          ),
         ),
       );
     });

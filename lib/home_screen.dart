@@ -34,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     print('HomeScreen - build()가 호출되었습니다.');
     return Consumer<UseProvider>(builder: (context, provider, child) {
-      // Random Cat API르 호출하여, DataModel로 변형한 자료를
+      // Random Cat API를 호출하여, DataModel로 변형한 자료를
       // 중앙 관리 데이터 List<CatModel> cats에 값을 넣는다.
       provider.cats = cats;
 
@@ -78,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
       title: Text(
         'Random Cat',
         style: GoogleFonts.bahiana(
-          fontSize: 40.0,
+          fontSize: 35.0,
           fontWeight: FontWeight.w400,
         ),
       ),
